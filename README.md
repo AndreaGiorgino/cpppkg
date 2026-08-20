@@ -5,9 +5,14 @@ repositories via `FetchContent`
 
 ## Build
 
+### Prerequisite
+
+- [cmake](https://cmake.org)
+
+### Compilation
+
 ```bash
-cmake -B build \
-    && cmake --build build --parallel $(($(nproc) - 1))
+cmake -B build && cmake --build build --parallel $(($(nproc) - 1))
 
 # or
 
