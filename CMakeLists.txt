@@ -20,6 +20,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include(${CMAKE_CURRENT_SOURCE_DIR}/CMake/Options.cmake)
 
 #
+# CMake generated files
+#
+
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/version.hxx.in
+    ${CMAKE_CURRENT_BINARY_DIR}/generated/version.hxx
+    @ONLY)
+
+#
 # Target
 #
 
@@ -51,5 +60,6 @@ target_include_directories(
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/generated>
         $<INSTALL_INTERFACE:include>
 )
