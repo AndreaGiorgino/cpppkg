@@ -61,3 +61,7 @@ option is provided.
 `list`
 
 Print the list of installed packages.
+
+### Example
+
+**cpppkg** uses itself! Check [cpppkg.json](cpppkg.json) to see how
