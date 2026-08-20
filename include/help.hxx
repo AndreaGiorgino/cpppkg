@@ -16,7 +16,7 @@ DESCRIPTION
 
 CONFIGURATION
     Packages must be defined in 'cpppkg.json'; the configuration file must follow
-    the following schema:
+    the schema:
 
     ```json
     {
