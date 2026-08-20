@@ -15,7 +15,7 @@ auto main(int argc, char** argv) -> int {
     bool force {};
 
     // handle options
-    for (; argIndex <= argc; argIndex++) {
+    for (; argIndex < argc; argIndex++) {
         const std::string arg {*(argv + argIndex)};
 
         if (arg.empty())
