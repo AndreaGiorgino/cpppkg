@@ -1,5 +1,8 @@
+#include <commands/install.hxx>
+#include <commands/list.hxx>
 #include <help.hxx>
 #include <iostream>
+#include <patch.hxx>
 #include <string>
 #include <version.hxx>
 
@@ -47,10 +50,12 @@ auto main(int argc, char** argv) -> int {
     const std::string command {*(argv + argIndex)};
 
     if (command == "i" || command == "install") {
-        // TODO: handle install command
-    } else if (command == "l" || command == "list") {
-        // TODO: handle list command
-    } else {
+        commands::install(force);
+        patchDeclare();
+        patchLink();
+    } else if (command == "l" || command == "list")
+        commands::list();
+    else {
         std::cerr << "Unknown command '" << command << "'\n\n";
         std::cout << TIP_MESSAGE << std::endl;
         return 2;
