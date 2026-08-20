@@ -14,6 +14,32 @@ DESCRIPTION
     After running 'cpppkg i' the files 'cpppkg/Declare.cmake' and 'cpppkg/Link.cmake'
     will be generated to be included in your CMakeLists.
 
+CONFIGURATION
+    Packages must be defined in 'cpppkg.json'; the configuration file must follow
+    the following schema:
+
+    ```json
+    {
+        "{{declareName}}": {
+            "user":       "{{gitUser}}",
+            "repository": "{{gitRepository}}",
+            "tag":        "{{gitTag}}"
+        },
+        ...
+    }
+    ```
+
+    Then update your CMakeLists file:
+
+    ```cmake
+    include(${CMAKE_CURRENT_SOURCE_DIR}/cpppkg/Declare.cmake)
+
+    # Build target
+    ...
+
+    include(${CMAKE_CURRENT_SOURCE_DIR}/cpppkg/Link.cmake)
+    ```
+
 OPTIONS
     -v, --version
         Print the program version message and exit.
