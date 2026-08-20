@@ -22,15 +22,14 @@ auto patchDeclare(void) -> void {
             "Top level value of the configuration file must be an object");
 
     // check install folder
-    const auto installFolderpath {fs::current_path() / "cpppkg"};
+    const auto installFolderpath {fs::current_path() / ".cpppkg"};
 
     if (!fs::exists(installFolderpath) || !fs::is_directory(installFolderpath))
         if (!fs::create_directory(installFolderpath))
             throw std::runtime_error(
-                "Cannot create the install folder: 'cpppkg'");
+                "Cannot create the install folder: '.cpppkg'");
 
-    const auto declareFilepath {fs::current_path() / "cpppkg"
-                                / "Declare.cmake"};
+    const auto declareFilepath {installFolderpath / "Declare.cmake"};
     std::ofstream ofs {declareFilepath};
 
     // check stream
@@ -41,7 +40,7 @@ auto patchDeclare(void) -> void {
     // iterate packages
     for (const auto& [k, _] : config.as<libjson::object_t>())
         // write the CMake include instruction
-        ofs << "include(${CMAKE_CURRENT_SOURCE_DIR}/cpppkg/" << k << ".cmake)"
+        ofs << "include(${CMAKE_CURRENT_SOURCE_DIR}/.cpppkg/" << k << ".cmake)"
             << std::endl;
 
     std::clog << "-- CMake declare file created" << std::endl;
@@ -63,14 +62,14 @@ auto patchLink(void) -> void {
             "Top level value of the configuration file must be an object");
 
     // check install folder
-    const auto installFolderpath {fs::current_path() / "cpppkg"};
+    const auto installFolderpath {fs::current_path() / ".cpppkg"};
 
     if (!fs::exists(installFolderpath) || !fs::is_directory(installFolderpath))
         if (!fs::create_directory(installFolderpath))
             throw std::runtime_error(
-                "Cannot create the install folder: 'cpppkg'");
+                "Cannot create the install folder: '.cpppkg'");
 
-    const auto declareFilepath {fs::current_path() / "cpppkg" / "Link.cmake"};
+    const auto declareFilepath {installFolderpath / "Link.cmake"};
     std::ofstream ofs {declareFilepath};
 
     // check stream

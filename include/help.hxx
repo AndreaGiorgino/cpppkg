@@ -11,7 +11,7 @@ DESCRIPTION
     repositories via 'FetchContent'. Each package must be defined inside
     'cpppkg.json' configuration file.
 
-    After running 'cpppkg i' the files 'cpppkg/Declare.cmake' and 'cpppkg/Link.cmake'
+    After running 'cpppkg i' the files '.cpppkg/Declare.cmake' and '.cpppkg/Link.cmake'
     will be generated to be included in your CMakeLists.
 
 CONFIGURATION
@@ -32,12 +32,12 @@ CONFIGURATION
     Then update your CMakeLists file:
 
     ```cmake
-    include(${CMAKE_CURRENT_SOURCE_DIR}/cpppkg/Declare.cmake)
+    include(${CMAKE_CURRENT_SOURCE_DIR}/.cpppkg/Declare.cmake)
 
     # Build target
     ...
 
-    include(${CMAKE_CURRENT_SOURCE_DIR}/cpppkg/Link.cmake)
+    include(${CMAKE_CURRENT_SOURCE_DIR}/.cpppkg/Link.cmake)
     ```
 
 OPTIONS

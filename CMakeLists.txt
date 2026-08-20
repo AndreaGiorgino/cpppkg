@@ -18,6 +18,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 #
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/CMake/Options.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/.cpppkg/Declare.cmake)
 
 #
 # CMake generated files
@@ -63,3 +64,5 @@ target_include_directories(
         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/generated>
         $<INSTALL_INTERFACE:include>
 )
+
+include(${CMAKE_CURRENT_SOURCE_DIR}/.cpppkg/Link.cmake)

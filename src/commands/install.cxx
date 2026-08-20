@@ -23,12 +23,12 @@ auto install(bool force) -> void {
             "Top level value of the configuration file must be an object");
 
     // check install folder
-    const auto installFolderpath {fs::current_path() / "cpppkg"};
+    const auto installFolderpath {fs::current_path() / ".cpppkg"};
 
     if (!fs::exists(installFolderpath) || !fs::is_directory(installFolderpath))
         if (!fs::create_directory(installFolderpath))
             throw std::runtime_error(
-                "Cannot create the install folder: 'cpppkg'");
+                "Cannot create the install folder: '.cpppkg'");
 
     // iterate packages
     for (const auto& [k, v] : config.as<libjson::object_t>()) {
