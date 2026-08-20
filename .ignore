@@ -1,4 +1,5 @@
 build/*
 files/*
 .cache/*
+.cpppkg/*
 Session.vim
