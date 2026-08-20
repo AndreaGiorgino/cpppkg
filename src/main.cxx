@@ -1,13 +1,18 @@
+#include <help.hxx>
 #include <iostream>
 #include <string>
+#include <version.hxx>
 
 auto main(int argc, char** argv) -> int {
     if (argc == 1) {
-        // TODO: print help message
+        std::cout << HELP_MESSAGE << std::endl;
         return 0;
     }
 
-    std::size_t argIndex {1};
+    int argIndex {1};
+
+    // global options
+    bool force {};
 
     // handle options
     for (; argIndex <= argc; argIndex++) {
@@ -18,16 +23,24 @@ auto main(int argc, char** argv) -> int {
         else if (arg[0] != '-')
             break;
         else if (arg == "-v" || arg == "--version") {
-            // TODO: print version message
+            std::cout << VERSION_MESSAGE << std::endl;
             return 0;
         } else if (arg == "-h" || arg == "--help") {
-            // TODO: print help message
+            std::cout << HELP_MESSAGE << std::endl;
             return 0;
-        } else {
+        } else if (arg == "--force")
+            force = true;
+        else {
             std::cerr << "Unknown option '" << arg << "'\n\n";
-            // TODO: print tip message
+            std::cout << TIP_MESSAGE << std::endl;
             return 2;
         }
+    }
+
+    if (argIndex == argc) {
+        std::cerr << "Missing command\n\n";
+        std::cout << TIP_MESSAGE << std::endl;
+        return 2;
     }
 
     // handle commands
@@ -35,15 +48,11 @@ auto main(int argc, char** argv) -> int {
 
     if (command == "i" || command == "install") {
         // TODO: handle install command
-    } else if (command == "d" || command == "delete") {
-        // TODO: handle delete command
-    } else if (command == "p" || command == "patch") {
-        // TODO: handle patch command
     } else if (command == "l" || command == "list") {
         // TODO: handle list command
     } else {
         std::cerr << "Unknown command '" << command << "'\n\n";
-        // TODO: print tip message
+        std::cout << TIP_MESSAGE << std::endl;
         return 2;
     }
 
