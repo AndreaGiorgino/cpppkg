@@ -52,7 +52,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/.cpppkg/Link.cmake)
 
 ### Commands
 
-`installl`
+`install`
 
 Generate the CMake files for the packages defined in the configuration file;
 package/s with already generated files will be skipped unless the '--force'
