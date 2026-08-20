@@ -40,8 +40,8 @@ auto patchDeclare(void) -> void {
     // iterate packages
     for (const auto& [k, _] : config.as<libjson::object_t>())
         // write the CMake include instruction
-        ofs << "include(${CMAKE_CURRENT_SOURCE_DIR}/.cpppkg/" << k << ".cmake)"
-            << std::endl;
+        ofs << "include(${CMAKE_CURRENT_SOURCE_DIR}/.cpppkg/packages/" << k
+            << ".cmake)" << std::endl;
 
     std::clog << "-- CMake declare file created" << std::endl;
 }

@@ -23,12 +23,19 @@ auto install(bool force) -> void {
             "Top level value of the configuration file must be an object");
 
     // check install folder
-    const auto installFolderpath {fs::current_path() / ".cpppkg"};
+    auto installFolderpath {fs::current_path() / ".cpppkg"};
 
     if (!fs::exists(installFolderpath) || !fs::is_directory(installFolderpath))
         if (!fs::create_directory(installFolderpath))
             throw std::runtime_error(
                 "Cannot create the install folder: '.cpppkg'");
+
+    installFolderpath /= "packages";
+
+    if (!fs::exists(installFolderpath) || !fs::is_directory(installFolderpath))
+        if (!fs::create_directory(installFolderpath))
+            throw std::runtime_error(
+                "Cannot create the install folder: '.cpppkg/packages'");
 
     // iterate packages
     for (const auto& [k, v] : config.as<libjson::object_t>()) {
@@ -48,13 +55,15 @@ auto install(bool force) -> void {
                                      + filepath.string() + "'");
 
         // write the CMake declare instructions
-        ofs << "cmake_minimum_required(VERSION 3.11)\n"
-            << "include(FetchContent)\n"
-            << "FetchContent_Declare(" << k
-            << " GIT_REPOSITORY \"git@github.com:"
+        ofs << "cmake_minimum_required(VERSION 3.11)\n\n"
+            << "include(FetchContent)\n\n"
+            << "FetchContent_Declare(\n"
+            << k << "\n"
+            << "    GIT_REPOSITORY \"git@github.com:"
             << v.at("user").as<std::string>() << "/"
-            << v.at("repository").as<std::string>() << "\" GIT_TAG "
-            << v.at("tag") << " GIT_SHALLOW TRUE)\n"
+            << v.at("repository").as<std::string>() << "\"\n"
+            << "    GIT_TAG " << v.at("tag") << "\n"
+            << "    GIT_SHALLOW TRUE\n)\n\n"
             << "FetchContent_MakeAvailable(" << k << ")" << std::endl;
 
         std::clog << "-- Package '" << k << "' installed" << std::endl;
